@@ -18,7 +18,7 @@
 (global-set-key (kbd "C-<f10>") 'menu-bar-mode)
 
 ;; Font size
-(define-key global-map (kbd "C-+") 'text-scale-increase)
+(define-key global-map (kbd "C-=") 'text-scale-increase)
 (define-key global-map (kbd "C--") 'text-scale-decrease)
 
 ;; Use regex searches by default.
@@ -91,5 +91,20 @@
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 
+(global-set-key [(meta x)] (lambda ()
+                             (interactive)
+                             (or (boundp 'smex-cache)
+                                 (smex-initialize))
+                             (global-set-key [(meta x)] 'smex)
+                             (smex)))
+
+(global-set-key [(shift meta x)] (lambda ()
+                                   (interactive)
+                                   (or (boundp 'smex-cache)
+                                       (smex-initialize))
+                                   (global-set-key [(shift meta x)] 'smex-major-mode-commands)
+                                   (smex-major-mode-commands)))
+
 (provide 'starter-kit-bindings)
 ;;; starter-kit-bindings.el ends here
+

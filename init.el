@@ -25,9 +25,11 @@
 (add-to-list 'load-path dotfiles-dir)
 
 (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/auto-complete"))
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/emacs-dbgr"))
-(add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/yasnippet"))
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/auto-complete"))
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/emacs-dbgr"))
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/yasnippet"))
+(add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/python-mode"))
+(add-to-list 'load-path (concat dotfiles-dir "vendor/ensime"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
@@ -35,7 +37,9 @@
 
 (require 'package)
 (dolist (source '(("technomancy" . "http://repo.technomancy.us/emacs/")
-                  ("elpa" . "http://tromey.com/elpa/")))
+                  ("elpa" . "http://tromey.com/elpa/")
+                  ("melpa" . "http://melpa.milkpbox.net/packages/")
+                  ("marmalade" . "http://marmalade-repo.org/packages/")))
   (add-to-list 'package-archives source t))
 (package-initialize)
 (require 'starter-kit-elpa)
@@ -68,8 +72,11 @@
 (require 'starter-kit-perl)
 (require 'starter-kit-ruby)
 (require 'starter-kit-js)
-(require 'starter-kit-python)
+(require 'epy-python)
 (require 'starter-kit-completion)
+(require 'starter-kit-scala)
+
+(require 'starter-kit-emms)
 
 (regen-autoloads)
 (load custom-file 'noerror)

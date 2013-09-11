@@ -1,4 +1,4 @@
-;; starter-kit-python.el - setup of python stuff
+ ;; starter-kit-python.el - setup of python stuff
 (require 'pymacs (concat dotfiles-dir "elpa-to-submit/pymacs.el"))
 
 (defun setup-ropemacs ()
@@ -24,11 +24,11 @@
                      (rope-open-project (concat default-directory "..")))
                     )))
   )
-
+ 
 ;; Customizing
 (setq flymake-enable-pyflakes t)
 (setq flymake-enable-pylint nil)
-(setq flymake-enable-pep8 nil)
+(setq flymake-enable-pep8 t)
 
 ;; Python or python mode?
 (eval-after-load 'python
@@ -117,7 +117,6 @@ is passed after the options."
 
      ;; Not on all modes, please
      (add-hook 'python-mode-hook 'flymake-find-file-hook)
-
      
      (when flymake-enable-pyflakes
        (flymake-add-checker 'flymake-pyflakes-init))
@@ -126,8 +125,14 @@ is passed after the options."
        (flymake-add-checker 'flymake-pylint-init))
 
      (when flymake-enable-pep8
-       (flymake-add-checker 'flymake-pep8-init)))
+       (flymake-add-checker 'flymake-pep8-init))
+
+     (add-hook 'python-mode-hook
+               '(lambda ()
+                  (define-key
+                    python-mode-map "\C-m" 'newline-and-indent))))
   )
+
 ;; Cython Mode
 (autoload 'cython-mode "cython-mode" "Mode for editing Cython source files")
 

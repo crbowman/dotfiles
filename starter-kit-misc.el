@@ -2,11 +2,16 @@
 ;;
 ;; Part of the Emacs Starter Kit
 
-(when window-system
-  (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-  (tooltip-mode -1)
-  (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+(if window-system
+  (progn  (setq frame-title-format '(buffer-file-name "%f" ("%b")))
+          (tooltip-mode -1)
+          (mouse-wheel-mode t)
+          (blink-cursor-mode -1)
+          (toggle-fullscreen)
+          (load-theme 'monokai t))
+  (progn (load-theme 'solarized-light t)))
+
+
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
 
@@ -14,6 +19,8 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (ansi-color-for-comint-mode-on)
+(global-linum-mode t)
+(delete-selection-mode t)
 
 (setq visible-bell t
       fringe-mode (cons 4 0)
@@ -112,6 +119,26 @@
       indent-region-mode t
       rng-nxml-auto-validate-flag nil)
 
+;; Smex hyphen on space
+(defadvice smex (around space-inserts-hyphen activate compile)
+        (let ((ido-cannot-complete-command 
+               `(lambda ()
+                  (interactive)
+                  (if (string= " " (this-command-keys))
+                      (insert ?-)
+                    (funcall ,ido-cannot-complete-command)))))
+          ad-do-it))
+
+;; Smex use acronyms
+(defadvice ido-set-matches-1 (after ido-acronym-matches activate)
+  (if (> (length ido-text) 1)
+    (let ((regex (concat "^" (mapconcat 'char-to-string ido-text "[^-]*-")
+                         "[^-]*$")))
+      (setq ad-return-value
+            (append (reverse (remove-if-not (lambda (i)
+                                              (string-match regex i)) items))
+                    ad-return-value)))))
+
 ;; Associate modes with file extensions
 
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
@@ -121,6 +148,9 @@
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.zshrc$" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.zsh-theme$" . sh-mode))
 
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
@@ -131,10 +161,14 @@
 (setq diff-switches "-u -w"
       magit-diff-options "-w")
 
-;; Cosmetics
+(setq emms-source-file-default-directory "~/Music/")
 
+;; Cosmetics
 (set-face-background 'vertical-border "white")
 (set-face-foreground 'vertical-border "white")
+
+;; default font size
+(set-face-attribute 'default nil :height 120)
 
 (eval-after-load 'diff-mode
   '(progn
