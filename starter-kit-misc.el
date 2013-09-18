@@ -11,6 +11,7 @@
           (load-theme 'monokai t))
   (progn (load-theme 'solarized-light t)))
 
+(set-cursor-color "#cccccc" ) 
 
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
@@ -138,6 +139,17 @@
             (append (reverse (remove-if-not (lambda (i)
                                               (string-match regex i)) items))
                     ad-return-value)))))
+ 
+(require 'powerline)
+(powerline-center-theme)
+
+(set-face-attribute 'mode-line nil
+                    :foreground "#fdf6e3"
+                    :background "#ed8002"
+                    :background "#2aa198"
+                    :box nil)
+(set-face-attribute 'mode-line-inactive nil
+                    :box nil)
 
 ;; Associate modes with file extensions
 

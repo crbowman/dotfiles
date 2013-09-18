@@ -1,3 +1,4 @@
+ac-comphist.dat
 loaddefs.el*
 backups/*
 auto-save-list
@@ -22,3 +23,5 @@ tramp
 \#*
 history
 *.pyc
+ido.last
+recentf

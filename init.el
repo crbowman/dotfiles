@@ -30,6 +30,7 @@
 (add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/yasnippet"))
 (add-to-list 'load-path (concat dotfiles-dir "elpa-to-submit/python-mode"))
 (add-to-list 'load-path (concat dotfiles-dir "vendor/ensime"))
+(add-to-list 'load-path (concat dotfiles-dir "vendor/powerline"))
 
 (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
 (setq package-user-dir (concat dotfiles-dir "elpa"))
@@ -76,7 +77,6 @@
 (require 'starter-kit-completion)
 (require 'starter-kit-scala)
 
-(require 'starter-kit-emms)
 
 (regen-autoloads)
 (load custom-file 'noerror)
