@@ -71,6 +71,10 @@
 #+END_SRC
 ** Windows
 #+BEGIN_SRC emacs-lisp
+  ;; Enable windmove as an alternative to other-window
+  ;; Use super-<left>|<right>|<up>|<down> to change windows
+  (windmove-default-keybindings 'super)
+
   ;; Window Switching: back one
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
@@ -129,7 +133,8 @@
   ;; Whitelist buffers that shouldn't be hidden
   (setq helm-white-buffer-regexp-list 
         (quote
-         ("\\*ansi-term"
+         ("\\*Messages\\*"
+          "\\*ansi-term"
           "\\*cider-repl.+\\*"
           "\\*cider-error.+\\*"
           "magit:.+")))
@@ -144,7 +149,8 @@
 #+END_SRC
 
 ** Fancify Symbols
-
+Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
+(+ a 5))=, =ƒ(+ % 5)=, =∈{2 4 6}= and =Ƥ=.
 #+BEGIN_SRC emacs-lisp
   ;; Represent annonymous functions, partial functions, and sets with greek symbols
   (setq clojure-enable-fancify-symbols t)
@@ -208,4 +214,39 @@
                                 (smartparens-strict-mode nil)
                                 (delete-backward-char)
                                 (smartparens-strict-mode t)))
+#+END_SRC
+
+* Flyspell
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Flyspell
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq-default dotspacemacs-configuration-layers
+  '((spell-checking :variables spell-checking-enable-by-default nil)))
+#+END_SRC
+* Which-Key
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Which-Key 
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq which-key-side-window-location 'right)
+  (setq which-key-side-window-max-width 0.33)
+  (setq which-key-side-window-max-height 0.25)
+  (setq which-key-add-column-padding 2)
+#+END_SRC
+* GPG
+#+BEGIN_SRC emacs-lisp
+(require 'epa-file)
+(custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
+(epa-file-enable)
 #+END_SRC

@@ -41,6 +41,10 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Enable windmove as an alternative to other-window
+;; Use super-<left>|<right>|<up>|<down> to change windows
+(windmove-default-keybindings 'super)
+
 ;; Window Switching: back one
 (global-set-key (kbd "C-x o") (lambda ()
                                 (interactive)
@@ -87,7 +91,8 @@
 ;; Whitelist buffers that shouldn't be hidden
 (setq helm-white-buffer-regexp-list 
       (quote
-       ("\\*ansi-term"
+       ("\\*Messages\\*"
+        "\\*ansi-term"
         "\\*cider-repl.+\\*"
         "\\*cider-error.+\\*"
         "magit:.+")))
@@ -156,3 +161,27 @@
                               (smartparens-strict-mode nil)
                               (delete-backward-char)
                               (smartparens-strict-mode t)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Flyspell
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq-default dotspacemacs-configuration-layers
+  '((spell-checking :variables spell-checking-enable-by-default nil)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Which-Key 
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq which-key-side-window-location 'right)
+(setq which-key-side-window-max-width 0.33)
+(setq which-key-side-window-max-height 0.25)
+(setq which-key-add-column-padding 2)
+
+(require 'epa-file)
+(custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
+(epa-file-enable)
