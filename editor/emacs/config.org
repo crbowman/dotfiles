@@ -274,3 +274,31 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
 (epa-file-enable)
 #+END_SRC
+* MMM-Mode
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Multiple Major Modes
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (mmm-add-classes '((markdown-clojure 
+                      :submode clojure-mode
+                      :face mmm-declaration-submode-face
+                      :front "^{% highlight clojure %}[\n\r]+"
+                      :back "^{% endhighlight %}$")))
+
+  (mmm-add-classes '((markdown-latex 
+                      :submode TeX-mode
+                      :face mmm-declaration-submode-face
+                      :front "^\\$\\$[\n\r]+"
+                      :back "^\\$\\$$")))
+
+  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
+  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
+
+  (setq mmm-parse-when-idle 't)
+#+END_SRC
+

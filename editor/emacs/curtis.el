@@ -202,3 +202,26 @@
 (require 'epa-file)
 (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
 (epa-file-enable)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Multiple Major Modes
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(mmm-add-classes '((markdown-clojure 
+                    :submode clojure-mode
+                    :face mmm-declaration-submode-face
+                    :front "^{% highlight clojure %}[\n\r]+"
+                    :back "^{% endhighlight %}$")))
+
+(mmm-add-classes '((markdown-latex 
+                    :submode TeX-mode
+                    :face mmm-declaration-submode-face
+                    :front "^\\$\\$[\n\r]+"
+                    :back "^\\$\\$$")))
+
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
+
+(setq mmm-parse-when-idle 't)
