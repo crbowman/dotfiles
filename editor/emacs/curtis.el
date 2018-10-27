@@ -37,6 +37,18 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
+;; Miscellaneous
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Temp Files
+
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+(setq create-lockfiles nil) ; stop creating .#lock files
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
 ;; Keybindings
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -46,14 +58,22 @@
 (windmove-default-keybindings 'super)
 
 ;; Window Switching: back one
+(global-set-key (kbd "<f9>") (lambda ()
+                                (interactive)
+                                (other-window -1)))
 (global-set-key (kbd "C-x o") (lambda ()
                                 (interactive)
                                 (other-window -1)))
 
 ;; Window Switching: forward one
+(global-set-key (kbd "<f10>") (lambda ()
+                                (interactive)
+                                (other-window 1)))
 (global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
                                 (other-window 1)))
+
+(global-set-key [f8] 'neotree-toggle)
 
 ;; Search and Replace 
 (global-set-key (kbd "C-s") 'isearch-forward-regex)
@@ -164,16 +184,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Flyspell
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq-default dotspacemacs-configuration-layers
-  '((spell-checking :variables spell-checking-enable-by-default nil)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; Which-Key 
+;; Which-Key
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -181,6 +192,12 @@
 (setq which-key-side-window-max-width 0.33)
 (setq which-key-side-window-max-height 0.25)
 (setq which-key-add-column-padding 2)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; GPG
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'epa-file)
 (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))

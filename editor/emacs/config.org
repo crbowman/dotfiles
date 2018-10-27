@@ -61,6 +61,23 @@
     (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 #+END_SRC
 
+* Misc
+
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Miscellaneous
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; Temp Files
+
+  (setq make-backup-files nil) ; stop creating backup~ files
+  (setq auto-save-default nil) ; stop creating #autosave# files
+  (setq create-lockfiles nil) ; stop creating .#lock files
+#+END_SRC
 * Keybindings
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -76,15 +93,27 @@
   (windmove-default-keybindings 'super)
 
   ;; Window Switching: back one
+  (global-set-key (kbd "<f9>") (lambda ()
+                                  (interactive)
+                                  (other-window -1)))
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
                                   (other-window -1)))
 
   ;; Window Switching: forward one
+  (global-set-key (kbd "<f10>") (lambda ()
+                                  (interactive)
+                                  (other-window 1)))
   (global-set-key (kbd "C-x p") (lambda ()
                                   (interactive)
                                   (other-window 1)))
 #+END_SRC
+
+** Neotree
+#+BEGIN_SRC emacs-lisp
+  (global-set-key [f8] 'neotree-toggle)
+#+END_SRC
+
 ** Search
 #+BEGIN_SRC emacs-lisp
   ;; Search and Replace 
@@ -216,24 +245,11 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
                                 (smartparens-strict-mode t)))
 #+END_SRC
 
-* Flyspell
-#+BEGIN_SRC emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
-  ;; Flyspell
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-(setq-default dotspacemacs-configuration-layers
-  '((spell-checking :variables spell-checking-enable-by-default nil)))
-#+END_SRC
 * Which-Key
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
-  ;; Which-Key 
+  ;; Which-Key
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
@@ -245,6 +261,14 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (setq which-key-add-column-padding 2)
 #+END_SRC
 * GPG
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; GPG
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
 (require 'epa-file)
 (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
