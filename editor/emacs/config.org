@@ -19,20 +19,32 @@
         user-mail-address "curtis@partiallyappllied.io")
 #+END_SRC 
 
-* Visuals
+* Appearance
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
-  ;; Visuals
+  ;; Appearance
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+** Fonts
 
+#+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"
+;; Fonts
+(defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
+                             ((<= 2560 (display-pixel-width)) 16)
+                             ((<= 1980 (display-pixel-width)) 14)
+                             ((<= 1440 (display-pixel-width)) 12)))
+
+(setq-default dotspacemacs-default-font `("Source Code Pro"
+                                          :size ,my-font-size
+                                          :weight normal
+                                          :height normal))
+#+END_SRC
 ** Powerline
-
 #+BEGIN_SRC emacs-lisp
   ;; Powerline Configs
-  (setq powerline-height 25)
+  (setq powerline-height 40)
   (setq ns-use-srgb-colorspace t)
   (setq powerline-default-separator 'utf8)
   (setq powerline-default-separator 'wave)
@@ -60,7 +72,6 @@
     :config
     (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 #+END_SRC
-
 * Misc
 
 #+BEGIN_SRC emacs-lisp
@@ -96,6 +107,7 @@
   (global-set-key (kbd "<f9>") (lambda ()
                                   (interactive)
                                   (other-window -1)))
+
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
                                   (other-window -1)))
@@ -104,6 +116,7 @@
   (global-set-key (kbd "<f10>") (lambda ()
                                   (interactive)
                                   (other-window 1)))
+
   (global-set-key (kbd "C-x p") (lambda ()
                                   (interactive)
                                   (other-window 1)))

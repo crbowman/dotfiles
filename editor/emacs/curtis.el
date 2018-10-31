@@ -10,12 +10,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
-;; Visuals
+;; Appearance
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Powerline Configs
-(setq powerline-height 25)
+(setq powerline-height 40)
 (setq ns-use-srgb-colorspace t)
 (setq powerline-default-separator 'utf8)
 (setq powerline-default-separator 'wave)
@@ -61,6 +61,7 @@
 (global-set-key (kbd "<f9>") (lambda ()
                                 (interactive)
                                 (other-window -1)))
+
 (global-set-key (kbd "C-x o") (lambda ()
                                 (interactive)
                                 (other-window -1)))
@@ -69,6 +70,7 @@
 (global-set-key (kbd "<f10>") (lambda ()
                                 (interactive)
                                 (other-window 1)))
+
 (global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
                                 (other-window 1)))
