@@ -1,0 +1,15 @@
+[user]
+  name = Curtis Bowman
+	email = c.bowman1711@gmail.com
+	username = crbowman
+
+[core]
+  editor = emacs -nw
+  excludesfile = ~/.config/git/gitignore
+
+[web]
+  browser = google-chrome
+
+[color]
+  ui = true
+
