@@ -197,6 +197,19 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;; Represent annonymous functions, partial functions, and sets with greek symbols
   (setq clojure-enable-fancify-symbols t)
 #+END_SRC
+* Python
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Python
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(setq python-shell-intepreter "~/.config/pyenv/shims/ipython")
+#+END_SRC
+
 * Smartparens
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
