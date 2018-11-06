@@ -36,7 +36,15 @@ This function should only modify configuration layer settings."
    '(html
      javascript
      clojure
-     python
+     (python :variables
+             python-tab-width 4
+             python-fill-column 99
+             python-test-runner 'nose
+             python-sort-imports-on-save 't
+             python-enable-yapf-format-on-save nil
+             python-auto-set-local-pyenv-version 'on-visit
+             python-auto-set-local-pyvenv-virtualenv 'on-visit
+             )
      graphviz
      latex
      markdown
