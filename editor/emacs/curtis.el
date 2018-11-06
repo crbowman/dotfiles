@@ -134,7 +134,11 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq python-shell-intepreter "~/.config/pyenv/shims/ipython")
+(setq exec-path (append '("/home/curtis/.config/pyenv/bin" "/home/curtis/.config/pyenv/shims" ) exec-path))
+
+
+(setq python-shell-interpreter-args "--simple-prompt -i" )
+(setq python-shell-interpreter "/home/curtis/.config/pyenv/shims/ipython")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
