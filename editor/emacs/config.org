@@ -139,12 +139,12 @@
 #+END_SRC
 ** OSX
 #+BEGIN_SRC emacs-lisp
-  ;; OSX Specific
-  (if (equal system-type 'darwin)
-      (progn
-        (setq mac-command-modifier 'meta)
-        (setq mac-option-modifier 'super)
-        (setq mac-function-modifier 'hyper)))
+      ;; OSX Specific
+      (if (equal system-type 'darwin)
+          (progn
+            (setq mac-command-modifier 'meta)
+            (setq mac-option-modifier 'super)
+            (setq mac-function-modifier 'hyper)))
 #+END_SRC
 
 * Helm
@@ -284,7 +284,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 
 #+BEGIN_SRC emacs-lisp
 (require 'epa-file)
-(custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
+(custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))
 (epa-file-enable)
 #+END_SRC
 * MMM-Mode
@@ -313,5 +313,23 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
   (setq mmm-parse-when-idle 't)
+#+END_SRC
+
+* Spotify
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Spotify.el
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+ 
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'load-path "~/code/spotify.el/")
+
+  (use-package spotify
+    :config
+    (setq spotify-oauth2-client-secret "8021211038534fbc8c3041e32e7f966c")
+    (setq spotify-oauth2-client-id "7d7e10746824419ea6a4129dd42839d8"))
 #+END_SRC
 

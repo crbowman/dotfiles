@@ -202,7 +202,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'epa-file)
-(custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2"))
+(custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))
 (epa-file-enable)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -227,3 +227,16 @@
 (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
 (setq mmm-parse-when-idle 't)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Spotify.el
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'load-path "~/code/spotify.el/")
+
+(use-package spotify
+  :config
+  (setq spotify-oauth2-client-secret "8021211038534fbc8c3041e32e7f966c")
+  (setq spotify-oauth2-client-id "7d7e10746824419ea6a4129dd42839d8"))
