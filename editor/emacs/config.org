@@ -314,22 +314,27 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (mmm-add-classes '((markdown-clojure 
-                      :submode clojure-mode
-                      :face mmm-declaration-submode-face
-                      :front "^{% highlight clojure %}[\n\r]+"
-                      :back "^{% endhighlight %}$")))
+    (mmm-add-classes '((markdown-clojure
+                        :submode clojure-mode
+                        :face mmm-declaration-submode-face
+                        :front "^{% highlight clojure %}[\n\r]+"
+                        :back "^{% endhighlight %}$")))
 
-  (mmm-add-classes '((markdown-latex 
-                      :submode TeX-mode
-                      :face mmm-declaration-submode-face
-                      :front "^\\$\\$[\n\r]+"
-                      :back "^\\$\\$$")))
+    (mmm-add-classes '((markdown-latex
+                        :submode TeX-mode
+                        :face mmm-declaration-submode-face
+                        :front "^\\$\\$[\n\r]+"
+                        :back "^\\$\\$$")))
 
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
+    (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
+    (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
-  (setq mmm-parse-when-idle 't)
+    (setq mmm-parse-when-idle 't)
+
+  (cond ((>= 3840 (display-pixel-width)) 20)
+        ((>= 2560 (display-pixel-width)) 16)
+        ((>= 1980 (display-pixel-width)) 14)
+        ((>= 1440 (display-pixel-width)) 12))
 #+END_SRC
 
 * Spotify
