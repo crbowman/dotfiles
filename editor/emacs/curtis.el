@@ -80,6 +80,7 @@
       (setq mac-option-modifier 'super)
       (setq mac-function-modifier 'hyper)))
 
+;; Function Keys
 (global-set-key [f1] 'spacemacs/cycle-spacemacs-theme)
 (global-set-key [f2] 'smartparens-strict-mode)
 (global-set-key [f3] 'delete-trailing-whitespace)
@@ -105,12 +106,19 @@
 (global-set-key (kbd "<s-f5>") (lambda ()
                                  (interactive)
                                  (find-file "~/code/dotfiles/editor/emacs/config.org")))
-(global-set-key (kbd "<s-f6>") (lambda () 
+(global-set-key (kbd "<s-f6>") (lambda ()
                                  (interactive)
                                  (find-file "~/code/dotfiles/editor/emacs/.myspacemacs")))
 
+;; Miscellaneous
 (global-set-key [home] 'beginning-of-buffer)
 (global-set-key [end] 'end-of-buffer)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Helm
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Hide boring buffers by regex
 (setq helm-boring-buffer-regexp-list
@@ -154,9 +162,10 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; setup pyenv
 (setq exec-path (append '("/home/curtis/.config/pyenv/bin" "/home/curtis/.config/pyenv/shims" ) exec-path))
 
-
+;; use ipython as python interpreter
 (setq python-shell-interpreter-args "--simple-prompt -i" )
 (setq python-shell-interpreter "/home/curtis/.config/pyenv/shims/ipython")
 
