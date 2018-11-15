@@ -30,21 +30,21 @@
 ** Fonts
 
 #+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"
-;; Fonts
-(defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
-                             ((<= 2560 (display-pixel-width)) 16)
-                             ((<= 1980 (display-pixel-width)) 14)
-                             ((<= 1440 (display-pixel-width)) 12)))
+  ;; Fonts
+  (defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
+                               ((<= 2560 (display-pixel-width)) 12)
+                               ((<= 1980 (display-pixel-width)) 12)
+                               ((<= 1440 (display-pixel-width)) 12)))
 
-(setq-default dotspacemacs-default-font `("Source Code Pro"
-                                          :size ,my-font-size
-                                          :weight normal
-                                          :height normal))
+  (setq-default dotspacemacs-default-font `("Source Code Pro"
+                                            :size ,my-font-size
+                                            :weight normal
+                                            :height normal))
 #+END_SRC
 ** Powerline
 #+BEGIN_SRC emacs-lisp
   ;; Powerline Configs
-  (setq powerline-height 40)
+  (setq powerline-height 30)
   (setq ns-use-srgb-colorspace t)
   (setq powerline-default-separator 'utf8)
   (setq powerline-default-separator 'wave)
@@ -247,8 +247,8 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
            (defvar pyenv-home "/home/curtis/.config/pyenv")))
 
     (setq exec-path (append
-                     '((concat pyenv-home "/bin")
-                       (concat pyenv-home "/shims"))
+                     `(,(concat pyenv-home "/bin")
+                       ,(concat pyenv-home "/shims"))
                      exec-path))
 
     ;; set ipython as python interpreter
@@ -376,11 +376,6 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
     (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
     (setq mmm-parse-when-idle 't)
-
-  (cond ((>= 3840 (display-pixel-width)) 20)
-        ((>= 2560 (display-pixel-width)) 16)
-        ((>= 1980 (display-pixel-width)) 14)
-        ((>= 1440 (display-pixel-width)) 12))
 #+END_SRC
 
 * Spotify

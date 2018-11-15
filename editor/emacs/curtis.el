@@ -15,7 +15,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Powerline Configs
-(setq powerline-height 40)
+(setq powerline-height 30)
 (setq ns-use-srgb-colorspace t)
 (setq powerline-default-separator 'utf8)
 (setq powerline-default-separator 'wave)
@@ -163,11 +163,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; setup pyenv
-(setq exec-path (append '("/home/curtis/.config/pyenv/bin" "/home/curtis/.config/pyenv/shims" ) exec-path))
+(cond ((equal system-type 'darwin)
+       (defvar pyenv-home "/Users/curtis/.pyenv"))
+      ((equal system-type 'gnu/linux)
+       (defvar pyenv-home "/home/curtis/.config/pyenv")))
 
-;; use ipython as python interpreter
+(setq exec-path (append
+                 `(,(concat pyenv-home "/bin")
+                   ,(concat pyenv-home "/shims"))
+                 exec-path))
+
+;; set ipython as python interpreter
 (setq python-shell-interpreter-args "--simple-prompt -i" )
-(setq python-shell-interpreter "/home/curtis/.config/pyenv/shims/ipython")
+(setq python-shell-interpreter (concat pyenv-home "/shims/ipython"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -257,26 +265,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (mmm-add-classes '((markdown-clojure
-                      :submode clojure-mode
-                      :face mmm-declaration-submode-face
-                      :front "^{% highlight clojure %}[\n\r]+"
-                      :back "^{% endhighlight %}$")))
+                    :submode clojure-mode
+                    :face mmm-declaration-submode-face
+                    :front "^{% highlight clojure %}[\n\r]+"
+                    :back "^{% endhighlight %}$")))
 
-  (mmm-add-classes '((markdown-latex
-                      :submode TeX-mode
-                      :face mmm-declaration-submode-face
-                      :front "^\\$\\$[\n\r]+"
-                      :back "^\\$\\$$")))
+(mmm-add-classes '((markdown-latex
+                    :submode TeX-mode
+                    :face mmm-declaration-submode-face
+                    :front "^\\$\\$[\n\r]+"
+                    :back "^\\$\\$$")))
 
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
-  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
+(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
-  (setq mmm-parse-when-idle 't)
-
-(cond ((>= 3840 (display-pixel-width)) 20)
-      ((>= 2560 (display-pixel-width)) 16)
-      ((>= 1980 (display-pixel-width)) 14)
-      ((>= 1440 (display-pixel-width)) 12))
+(setq mmm-parse-when-idle 't)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
