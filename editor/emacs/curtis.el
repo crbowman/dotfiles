@@ -87,7 +87,7 @@
 (global-set-key [f5] 'helm-projectile)
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'spacemacs/default-pop-shell)
-(global-set-key [f8] 'neotree-show)
+(global-set-key [f8] 'neotree-toggle)
 (global-set-key (kbd "<f9>") (lambda ()
                                 (interactive)
                                 (other-window -1)))
