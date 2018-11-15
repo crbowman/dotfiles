@@ -334,9 +334,13 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(require 'epa-file)
-(custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))
-(epa-file-enable)
+  (use-package epa-file
+    :config
+    (cond ((equal system-type 'darwin)
+           (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2")))
+          ((equal system-type 'gnu/linux)
+           (custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))))
+    (epa-file-enable))
 #+END_SRC
 * MMM-Mode
 #+BEGIN_SRC emacs-lisp

@@ -242,9 +242,13 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'epa-file)
-(custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))
-(epa-file-enable)
+(use-package epa-file
+  :config
+  (cond ((equal system-type 'darwin)
+         (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2")))
+        ((equal system-type 'gnu/linux)
+         (custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))))
+  (epa-file-enable))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
