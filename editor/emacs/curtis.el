@@ -57,33 +57,21 @@
 ;; Use super-<left>|<right>|<up>|<down> to change windows
 (windmove-default-keybindings 'super)
 
-;; Window Switching: back one
-(global-set-key (kbd "<f9>") (lambda ()
+(global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
-                                (other-window -1)))
+                                (other-window 1)))
 
 (global-set-key (kbd "C-x o") (lambda ()
                                 (interactive)
                                 (other-window -1)))
 
-;; Window Switching: forward one
-(global-set-key (kbd "<f10>") (lambda ()
-                                (interactive)
-                                (other-window 1)))
-
-(global-set-key (kbd "C-x p") (lambda ()
-                                (interactive)
-                                (other-window 1)))
-
-(global-set-key [f8] 'neotree-toggle)
-
-;; Search and Replace 
+;; Search and Replace
 (global-set-key (kbd "C-s") 'isearch-forward-regex)
 (global-set-key (kbd "C-r") 'isearch-backward-regex)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 (global-set-key (kbd "C-%") 'isearch-query-replace-regex)
-(global-set-key (kbd "C-M-%") 'isearch-query-replace-regex)
+(global-set-key (kbd "C-M-%") 'isearch-query-replace)
 
 ;; OSX Specific
 (if (equal system-type 'darwin)
@@ -92,8 +80,40 @@
       (setq mac-option-modifier 'super)
       (setq mac-function-modifier 'hyper)))
 
+(global-set-key [f1] 'spacemacs/cycle-spacemacs-theme)
+(global-set-key [f2] 'smartparens-strict-mode)
+(global-set-key [f3] 'delete-trailing-whitespace)
+(global-set-key [f4] 'comment-or-uncomment-region)
+(global-set-key [f5] 'helm-projectile)
+(global-set-key [f6] 'magit-status)
+(global-set-key [f7] 'spacemacs/default-pop-shell)
+(global-set-key [f8] 'neotree-show)
+(global-set-key (kbd "<f9>") (lambda ()
+                                (interactive)
+                                (other-window -1)))
+(global-set-key (kbd "<f10>") (lambda ()
+                                (interactive)
+                                (other-window 1)))
+(global-set-key [f11] 'toggle-frame-fullscreen)
+(global-set-key [f12] 'undo-tree-undo)
+
+;; Logitech G710+ G-keys
+(global-set-key [s-f1] 'isearch-backward)
+(global-set-key [s-f2] 'isearch-forward)
+(global-set-key [s-f3] 'isearch-query-replace)
+(global-set-key [s-f4] 'org-babel-tangle)
+(global-set-key (kbd "<s-f5>") (lambda ()
+                                 (interactive)
+                                 (find-file "~/code/dotfiles/editor/emacs/config.org")))
+(global-set-key (kbd "<s-f6>") (lambda () 
+                                 (interactive)
+                                 (find-file "~/code/dotfiles/editor/emacs/.myspacemacs")))
+
+(global-set-key [home] 'beginning-of-buffer)
+(global-set-key [end] 'end-of-buffer)
+
 ;; Hide boring buffers by regex
-(setq helm-boring-buffer-regexp-list 
+(setq helm-boring-buffer-regexp-list
       (quote
        ("\\*.+\\*"
         "\\` \\*"
@@ -111,7 +131,7 @@
 (advice-add 'helm-skip-boring-buffers :filter-return 'my-filter-dired-buffers)
 
 ;; Whitelist buffers that shouldn't be hidden
-(setq helm-white-buffer-regexp-list 
+(setq helm-white-buffer-regexp-list
       (quote
        ("\\*Messages\\*"
         "\\*ansi-term"
@@ -223,22 +243,27 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(mmm-add-classes '((markdown-clojure 
-                    :submode clojure-mode
-                    :face mmm-declaration-submode-face
-                    :front "^{% highlight clojure %}[\n\r]+"
-                    :back "^{% endhighlight %}$")))
+(mmm-add-classes '((markdown-clojure
+                      :submode clojure-mode
+                      :face mmm-declaration-submode-face
+                      :front "^{% highlight clojure %}[\n\r]+"
+                      :back "^{% endhighlight %}$")))
 
-(mmm-add-classes '((markdown-latex 
-                    :submode TeX-mode
-                    :face mmm-declaration-submode-face
-                    :front "^\\$\\$[\n\r]+"
-                    :back "^\\$\\$$")))
+  (mmm-add-classes '((markdown-latex
+                      :submode TeX-mode
+                      :face mmm-declaration-submode-face
+                      :front "^\\$\\$[\n\r]+"
+                      :back "^\\$\\$$")))
 
-(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
-(mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
+  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-clojure)
+  (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-latex)
 
-(setq mmm-parse-when-idle 't)
+  (setq mmm-parse-when-idle 't)
+
+(cond ((>= 3840 (display-pixel-width)) 20)
+      ((>= 2560 (display-pixel-width)) 16)
+      ((>= 1980 (display-pixel-width)) 14)
+      ((>= 1440 (display-pixel-width)) 12))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

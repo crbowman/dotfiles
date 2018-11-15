@@ -17,7 +17,7 @@
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Curtis Bowman"
         user-mail-address "curtis@partiallyappllied.io")
-#+END_SRC 
+#+END_SRC
 
 * Appearance
 #+BEGIN_SRC emacs-lisp
@@ -103,39 +103,25 @@
   ;; Use super-<left>|<right>|<up>|<down> to change windows
   (windmove-default-keybindings 'super)
 
-  ;; Window Switching: back one
-  (global-set-key (kbd "<f9>") (lambda ()
+  (global-set-key (kbd "C-x p") (lambda ()
                                   (interactive)
-                                  (other-window -1)))
+                                  (other-window 1)))
 
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
                                   (other-window -1)))
-
-  ;; Window Switching: forward one
-  (global-set-key (kbd "<f10>") (lambda ()
-                                  (interactive)
-                                  (other-window 1)))
-
-  (global-set-key (kbd "C-x p") (lambda ()
-                                  (interactive)
-                                  (other-window 1)))
 #+END_SRC
 
-** Neotree
-#+BEGIN_SRC emacs-lisp
-  (global-set-key [f8] 'neotree-toggle)
-#+END_SRC
 
 ** Search
 #+BEGIN_SRC emacs-lisp
-  ;; Search and Replace 
+  ;; Search and Replace
   (global-set-key (kbd "C-s") 'isearch-forward-regex)
   (global-set-key (kbd "C-r") 'isearch-backward-regex)
   (global-set-key (kbd "C-M-s") 'isearch-forward)
   (global-set-key (kbd "C-M-r") 'isearch-backward)
   (global-set-key (kbd "C-%") 'isearch-query-replace-regex)
-  (global-set-key (kbd "C-M-%") 'isearch-query-replace-regex)
+  (global-set-key (kbd "C-M-%") 'isearch-query-replace)
 #+END_SRC
 ** OSX
 #+BEGIN_SRC emacs-lisp
@@ -147,11 +133,50 @@
             (setq mac-function-modifier 'hyper)))
 #+END_SRC
 
+** Function Keys
+#+BEGIN_SRC emacs-lisp
+  (global-set-key [f1] 'spacemacs/cycle-spacemacs-theme)
+  (global-set-key [f2] 'smartparens-strict-mode)
+  (global-set-key [f3] 'delete-trailing-whitespace)
+  (global-set-key [f4] 'comment-or-uncomment-region)
+  (global-set-key [f5] 'helm-projectile)
+  (global-set-key [f6] 'magit-status)
+  (global-set-key [f7] 'spacemacs/default-pop-shell)
+  (global-set-key [f8] 'neotree-show)
+  (global-set-key (kbd "<f9>") (lambda ()
+                                  (interactive)
+                                  (other-window -1)))
+  (global-set-key (kbd "<f10>") (lambda ()
+                                  (interactive)
+                                  (other-window 1)))
+  (global-set-key [f11] 'toggle-frame-fullscreen)
+  (global-set-key [f12] 'undo-tree-undo)
+#+END_SRC
+** Logitech G710+ G-keys
+#+BEGIN_SRC emacs-lisp
+          ;; Logitech G710+ G-keys
+          (global-set-key [s-f1] 'isearch-backward)
+          (global-set-key [s-f2] 'isearch-forward)
+          (global-set-key [s-f3] 'isearch-query-replace)
+          (global-set-key [s-f4] 'org-babel-tangle)
+          (global-set-key (kbd "<s-f5>") (lambda ()
+                                           (interactive)
+                                           (find-file "~/code/dotfiles/editor/emacs/config.org")))
+          (global-set-key (kbd "<s-f6>") (lambda () 
+                                           (interactive)
+                                           (find-file "~/code/dotfiles/editor/emacs/.myspacemacs")))
+#+END_SRC
+** Miscellaneous
+#+BEGIN_SRC emacs-lisp
+
+  (global-set-key [home] 'beginning-of-buffer)
+  (global-set-key [end] 'end-of-buffer)
+#+END_SRC
 * Helm
 ** Boring Buffers
 #+BEGIN_SRC emacs-lisp
       ;; Hide boring buffers by regex
-      (setq helm-boring-buffer-regexp-list 
+      (setq helm-boring-buffer-regexp-list
             (quote
              ("\\*.+\\*"
               "\\` \\*"
@@ -173,7 +198,7 @@
 ** Whitelist Buffers
 #+BEGIN_SRC emacs-lisp
   ;; Whitelist buffers that shouldn't be hidden
-  (setq helm-white-buffer-regexp-list 
+  (setq helm-white-buffer-regexp-list
         (quote
          ("\\*Messages\\*"
           "\\*ansi-term"
@@ -345,7 +370,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
- 
+
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/code/spotify.el/")
 
@@ -354,4 +379,3 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
     (setq spotify-oauth2-client-secret "8021211038534fbc8c3041e32e7f966c")
     (setq spotify-oauth2-client-id "7d7e10746824419ea6a4129dd42839d8"))
 #+END_SRC
-
