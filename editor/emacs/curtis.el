@@ -86,6 +86,7 @@
 (global-set-key [f3] 'delete-trailing-whitespace)
 (global-set-key [f4] 'comment-or-uncomment-region)
 (global-set-key [f5] 'projectile-dired)
+(global-set-key [C-f5] 'helm-projectile)
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'spacemacs/default-pop-shell)
 (global-set-key [f8] 'neotree-toggle)
@@ -98,6 +99,7 @@
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key [f12] 'undo-tree-undo)
 (global-set-key [f13] 'evil-toggle-fold)
+(global-set-key [C-f13] 'spacemacs/fold-transient-state/body)
 (global-set-key [f14] 'evil-close-folds)
 (global-set-key [f15] 'evil-open-folds)
 
@@ -208,10 +210,10 @@
 (global-set-key (kbd "M-<delete>") 'sp-unwrap-sexp)
 (global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
 
-(global-set-key (kbd "C-<right>") 'sp-forward-slurp-sexp)
-(global-set-key (kbd "C-<left>") 'sp-forward-barf-sexp)
-(global-set-key (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-(global-set-key (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+(global-set-key (kbd "C-0") 'sp-forward-slurp-sexp)
+(global-set-key (kbd "C-M-0") 'sp-forward-barf-sexp)
+(global-set-key (kbd "C-9") 'sp-backward-slurp-sexp)
+(global-set-key (kbd "C-M-9") 'sp-backward-barf-sexp)
 
 (global-set-key (kbd "M-D") 'sp-splice-sexp)
 (global-set-key (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
@@ -232,9 +234,9 @@
 (bind-key "C-c b" (lambda () (interactive) (sp-beginning-of-sexp -2)) smartparens-mode-map)
 
 (global-set-key (kbd "H-<delete>") (lambda ()
-                              (smartparens-strict-mode nil)
-                              (delete-backward-char)
-                              (smartparens-strict-mode t)))
+                                     (smartparens-strict-mode nil)
+                                     (delete-backward-char)
+                                     (smartparens-strict-mode t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
