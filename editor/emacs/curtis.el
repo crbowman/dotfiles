@@ -85,7 +85,7 @@
 (global-set-key [f2] 'smartparens-strict-mode)
 (global-set-key [f3] 'delete-trailing-whitespace)
 (global-set-key [f4] 'comment-or-uncomment-region)
-(global-set-key [f5] 'helm-projectile)
+(global-set-key [f5] 'projectile-dired)
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'spacemacs/default-pop-shell)
 (global-set-key [f8] 'neotree-toggle)
@@ -97,6 +97,9 @@
                                 (other-window 1)))
 (global-set-key [f11] 'toggle-frame-fullscreen)
 (global-set-key [f12] 'undo-tree-undo)
+(global-set-key [f13] 'evil-toggle-fold)
+(global-set-key [f14] 'evil-close-folds)
+(global-set-key [f15] 'evil-open-folds)
 
 ;; Logitech G710+ G-keys
 (global-set-key [s-f1] 'isearch-backward)
