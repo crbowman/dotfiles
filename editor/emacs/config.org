@@ -227,7 +227,12 @@
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-
+** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (local-set-key [C-f7] 'cider-jack-in))
+#+END_SRC
 ** Fancify Symbols
 Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 (+ a 5))=, =ƒ(+ % 5)=, =∈{2 4 6}= and =Ƥ=.
@@ -243,7 +248,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-
+** Pyenv
 #+BEGIN_SRC emacs-lisp
     ;; setup pyenv
     (cond ((equal system-type 'darwin)
@@ -255,10 +260,17 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
                      `(,(concat pyenv-home "/bin")
                        ,(concat pyenv-home "/shims"))
                      exec-path))
-
-    ;; set ipython as python interpreter
+#+END_SRC
+** IPython
+#+BEGIN_SRC emacs-lisp
     (setq python-shell-interpreter-args "--simple-prompt -i" )
     (setq python-shell-interpreter (concat pyenv-home "/shims/ipython"))
+#+END_SRC
+** Hooks
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (local-set-key [C-f7] 'spacemacs/python-start-or-switch-repl)
 #+END_SRC
 
 * Smartparens
