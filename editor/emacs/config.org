@@ -112,7 +112,6 @@
                                   (other-window -1)))
 #+END_SRC
 
-
 ** Search
 #+BEGIN_SRC emacs-lisp
   ;; Search and Replace
@@ -316,9 +315,9 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (bind-key "C-c b" (lambda () (interactive) (sp-beginning-of-sexp -2)) smartparens-mode-map)
 
   (global-set-key (kbd "H-<delete>") (lambda ()
-                                (smartparens-strict-mode nil)
-                                (delete-backward-char)
-                                (smartparens-strict-mode t)))
+                                       (smartparens-strict-mode nil)
+                                       (delete-backward-char)
+                                       (smartparens-strict-mode t)))
 #+END_SRC
 
 * Which-Key
