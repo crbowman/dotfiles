@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(html
+   `(html
      javascript
      clojure
      (python :variables
@@ -43,8 +43,7 @@ This function should only modify configuration layer settings."
              python-sort-imports-on-save t
              python-enable-yapf-format-on-save nil
              python-auto-set-local-pyenv-version 'on-visit
-             python-auto-set-local-pyvenv-virtualenv 'on-visit
-             )
+             python-auto-set-local-pyvenv-virtualenv 'on-visit)
      graphviz
      latex
      markdown
@@ -70,7 +69,8 @@ This function should only modify configuration layer settings."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom
-            shell-default-term-shell "/usr/bin/zsh")
+            shell-default-term-shell ,(cond ((equal system-type 'darwin) "/usr/local/bin/zsh")
+                                            ((equal system-type 'gnu/linux) "/usr/bin/zsh")))
      syntax-checking
      version-control)
 
@@ -82,8 +82,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(solaire-mode
-                                      all-the-icons
-                                      helm-spotify-plus)
+                                      all-the-icons)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -107,6 +106,7 @@ before layer configuration.
 It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
+
   (setq-default
    ;; If non-nil then enable support for the portable dumper. You'll need
    ;; to compile Emacs 27 from source following the instructions in file
@@ -182,7 +182,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner '666
+   dotspacemacs-startup-banner 'random
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
