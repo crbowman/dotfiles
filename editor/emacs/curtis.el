@@ -14,12 +14,12 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Powerline Configs
-(setq powerline-height 30)
-(setq ns-use-srgb-colorspace t)
-(setq powerline-default-separator 'utf8)
-(setq powerline-default-separator 'wave)
-(spaceline-compile)
+;; Doom Modeline
+(setq doom-modeline-buffer-file-name-style 'relative-from-project)
+
+;; Display Time
+(setq display-time-default-load-average nil)
+(display-time-mode t)
 
 ;; Doom Themes Configuration
 (setq doom-themes-enable-bold t

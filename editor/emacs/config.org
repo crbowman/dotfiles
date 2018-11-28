@@ -42,13 +42,25 @@
                                             :height normal))
 #+END_SRC
 ** Powerline
-#+BEGIN_SRC emacs-lisp
-  ;; Powerline Configs
+#+BEGIN_SRC emacs-lisp :tangle no
+  ;; Spaceline Configs
   (setq powerline-height 30)
   (setq ns-use-srgb-colorspace t)
   (setq powerline-default-separator 'utf8)
   (setq powerline-default-separator 'wave)
   (spaceline-compile)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; Doom Modeline
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; Display Time
+  (setq display-time-default-load-average nil)
+  (display-time-mode t)
 #+END_SRC
 
 ** Doom Themes
