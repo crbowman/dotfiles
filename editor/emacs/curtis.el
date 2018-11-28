@@ -65,14 +65,6 @@
                                 (interactive)
                                 (other-window -1)))
 
-;; Search and Replace
-(global-set-key (kbd "C-s") 'isearch-forward-regex)
-(global-set-key (kbd "C-r") 'isearch-backward-regex)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
-(global-set-key (kbd "C-%") 'isearch-query-replace-regex)
-(global-set-key (kbd "C-M-%") 'isearch-query-replace)
-
 ;; OSX Specific
 (if (equal system-type 'darwin)
     (progn

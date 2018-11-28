@@ -124,16 +124,6 @@
                                   (other-window -1)))
 #+END_SRC
 
-** Search
-#+BEGIN_SRC emacs-lisp
-  ;; Search and Replace
-  (global-set-key (kbd "C-s") 'isearch-forward-regex)
-  (global-set-key (kbd "C-r") 'isearch-backward-regex)
-  (global-set-key (kbd "C-M-s") 'isearch-forward)
-  (global-set-key (kbd "C-M-r") 'isearch-backward)
-  (global-set-key (kbd "C-%") 'isearch-query-replace-regex)
-  (global-set-key (kbd "C-M-%") 'isearch-query-replace)
-#+END_SRC
 ** OSX
 #+BEGIN_SRC emacs-lisp
       ;; OSX Specific
