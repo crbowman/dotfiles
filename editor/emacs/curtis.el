@@ -158,9 +158,10 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (local-set-key [C-f7] 'cider-jack-in))
+(use-package clojure-mode
+  :bind (:map clojure-mode-map
+         ([C-f7] . cider-jack-in)
+         ([C-M-f7] . cider-eval-buffer)))
 
 ;; Represent annonymous functions, partial functions, and sets with greek symbols
 (setq clojure-enable-fancify-symbols t)
@@ -185,9 +186,9 @@
 (setq python-shell-interpreter-args "--simple-prompt -i" )
 (setq python-shell-interpreter (concat pyenv-home "/shims/ipython"))
 
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key [C-f7] 'spacemacs/python-start-or-switch-repl)
+(use-package python-mode
+  :bind (:map python-mode-map
+         ([C-f7] . spacemacs/python-start-or-switch-repl)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

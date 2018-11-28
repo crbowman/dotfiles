@@ -229,9 +229,10 @@
 #+END_SRC
 ** Hooks
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'clojure-mode-hook
-            (lambda ()
-              (local-set-key [C-f7] 'cider-jack-in))
+    (use-package clojure-mode
+      :bind (:map clojure-mode-map
+             ([C-f7] . cider-jack-in)
+             ([C-M-f7] . cider-eval-buffer)))
 #+END_SRC
 ** Fancify Symbols
 Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
@@ -268,9 +269,9 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 ** Hooks
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (local-set-key [C-f7] 'spacemacs/python-start-or-switch-repl)
+    (use-package python-mode
+      :bind (:map python-mode-map
+             ([C-f7] . spacemacs/python-start-or-switch-repl)))
 #+END_SRC
 
 * Smartparens
