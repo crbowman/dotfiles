@@ -27,43 +27,41 @@
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
+
 ** Fonts
+#+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Fonts
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"
-;; Fonts
-(defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
-                             ((<= 2560 (display-pixel-width)) 16)
-                             ((<= 1980 (display-pixel-width)) 14)
-                             ((<= 1440 (display-pixel-width)) 12)))
+  (defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
+                               ((<= 2560 (display-pixel-width)) 16)
+                               ((<= 1980 (display-pixel-width)) 14)
+                               ((<= 1440 (display-pixel-width)) 12)))
 
-(setq-default dotspacemacs-default-font `("Source Code Pro"
-                                          :size ,my-font-size
-                                          :weight normal
-                                          :height normal))
+  (setq-default dotspacemacs-default-font `("Source Code Pro"
+                                            :size ,my-font-size
+                                            :weight normal
+                                            :height normal))
 #+END_SRC
-** Powerline
+
+** Modeline
 #+BEGIN_SRC emacs-lisp
-  ;; Powerline Configs
-  (setq powerline-height 40)
-  (setq ns-use-srgb-colorspace t)
-  (setq powerline-default-separator 'utf8)
-  (setq powerline-default-separator 'wave)
-  (spaceline-compile)
+  ;; Doom Modeline
+  (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 #+END_SRC
 
 ** Doom Themes
-
 #+BEGIN_SRC emacs-lisp
   ;; Doom Themes Configuration
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
-  (doom-themes-neotree-config)
-  (setq doom-neotree-file-icons 'simple)
   (doom-themes-org-config)
 #+END_SRC
 
 ** Solaire Mode
-
 #+BEGIN_SRC emacs-lisp
   ;; Changes the background color to create contrast between file buffers and
   ;; pop-up buffers like neotree/helm/etc..
@@ -72,8 +70,8 @@
     :config
     (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 #+END_SRC
-* Misc
 
+* Misc
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
@@ -82,13 +80,21 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+** Temp Files
 #+BEGIN_SRC emacs-lisp
   ;; Temp Files
-
   (setq make-backup-files nil) ; stop creating backup~ files
   (setq auto-save-default nil) ; stop creating #autosave# files
   (setq create-lockfiles nil) ; stop creating .#lock files
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; No more "Package cl is deprecated" warnings from third-party packages
+  (setq byte-compile-warnings '(cl-functions))
+
+
+#+END_SRC
+
 * Keybindings
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -97,46 +103,7 @@
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-** Windows
-#+BEGIN_SRC emacs-lisp
-  ;; Enable windmove as an alternative to other-window
-  ;; Use super-<left>|<right>|<up>|<down> to change windows
-  (windmove-default-keybindings 'super)
 
-  ;; Window Switching: back one
-  (global-set-key (kbd "<f9>") (lambda ()
-                                  (interactive)
-                                  (other-window -1)))
-
-  (global-set-key (kbd "C-x o") (lambda ()
-                                  (interactive)
-                                  (other-window -1)))
-
-  ;; Window Switching: forward one
-  (global-set-key (kbd "<f10>") (lambda ()
-                                  (interactive)
-                                  (other-window 1)))
-
-  (global-set-key (kbd "C-x p") (lambda ()
-                                  (interactive)
-                                  (other-window 1)))
-#+END_SRC
-
-** Neotree
-#+BEGIN_SRC emacs-lisp
-  (global-set-key [f8] 'neotree-toggle)
-#+END_SRC
-
-** Search
-#+BEGIN_SRC emacs-lisp
-  ;; Search and Replace 
-  (global-set-key (kbd "C-s") 'isearch-forward-regex)
-  (global-set-key (kbd "C-r") 'isearch-backward-regex)
-  (global-set-key (kbd "C-M-s") 'isearch-forward)
-  (global-set-key (kbd "C-M-r") 'isearch-backward)
-  (global-set-key (kbd "C-%") 'isearch-query-replace-regex)
-  (global-set-key (kbd "C-M-%") 'isearch-query-replace-regex)
-#+END_SRC
 ** OSX
 #+BEGIN_SRC emacs-lisp
       ;; OSX Specific
@@ -147,15 +114,83 @@
             (setq mac-function-modifier 'hyper)))
 #+END_SRC
 
+** Windows
+#+BEGIN_SRC emacs-lisp
+  ;; Window switching
+  (global-set-key (kbd "C-x o") (lambda ()
+                                  (interactive)
+                                  (other-window -1)))
+  (global-set-key (kbd "C-x p") (lambda ()
+                                  (interactive)
+                                  (other-window 1)))
+
+  ;; Enable windmove as an alternative to other-window
+  ;; Use super-<left>|<right>|<up>|<down> to change windows
+  (windmove-default-keybindings 'super)
+#+END_SRC
+
+** Function Keys
+#+BEGIN_SRC emacs-lisp
+  ;;Function Keys
+  (global-set-key [f1] 'spacemacs/cycle-spacemacs-theme)
+  (global-set-key [f2] 'smartparens-strict-mode)
+  (global-set-key [f3] 'delete-trailing-whitespace)
+  (global-set-key [f4] 'comment-or-uncomment-region)
+  (global-set-key [f5] 'projectile-dired)
+  (global-set-key [C-f5] 'helm-projectile)
+  (global-set-key [f6] 'magit-status)
+  (global-set-key [f7] 'spacemacs/default-pop-shell)
+  (global-set-key [f8] 'neotree-toggle)
+  (global-set-key (kbd "<f9>") (lambda ()
+                               (interactive)
+                               (other-window -1)))
+  (global-set-key (kbd "<f10>") (lambda ()
+                               (interactive)
+                               (other-window 1)))
+  (global-set-key [f11] 'toggle-frame-fullscreen)
+  (global-set-key [f12] 'undo-tree-undo)
+  (global-set-key [f13] 'evil-toggle-fold)
+  (global-set-key [C-f13] 'spacemacs/fold-transient-state/body)
+  (global-set-key [f14] 'evil-close-folds)
+  (global-set-key [f15] 'evil-open-folds)
+
+  ;; Logitech G710+ G-keys
+  (global-set-key [s-f1] 'isearch-backward)
+  (global-set-key [s-f2] 'isearch-forward)
+  (global-set-key [s-f3] 'isearch-query-replace)
+  (global-set-key [s-f4] 'org-babel-tangle)
+  (global-set-key (kbd "<s-f5>") (lambda ()
+                                 (interactive)
+                                 (find-file "~/code/dotfiles/editor/emacs/config.org")))
+  (global-set-key (kbd "<s-f6>") (lambda ()
+                                 (interactive)
+                                 (find-file "~/code/dotfiles/editor/emacs/.myspacemacs")))
+#+END_SRC
+
+** Miscellaneous
+#+BEGIN_SRC emacs-lisp
+  ;;Miscellaneous
+  (global-set-key [home] 'beginning-of-buffer)
+  (global-set-key [end] 'end-of-buffer)
+#+END_SRC
+
 * Helm
+#+BEGIN_SRC emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; Helm
+  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
+
 ** Boring Buffers
 #+BEGIN_SRC emacs-lisp
-      ;; Hide boring buffers by regex
-      (setq helm-boring-buffer-regexp-list 
-            (quote
-             ("\\*.+\\*"
-              "\\` \\*"
-              "magit.+")))
+  ;; Hide boring buffers by regex
+  (setq helm-boring-buffer-regexp-list
+        (quote
+         ("\\*.+\\*"
+          "\\` \\*"
+          "magit.+")))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -170,10 +205,11 @@
 
   (advice-add 'helm-skip-boring-buffers :filter-return 'my-filter-dired-buffers)
 #+END_SRC
+
 ** Whitelist Buffers
 #+BEGIN_SRC emacs-lisp
   ;; Whitelist buffers that shouldn't be hidden
-  (setq helm-white-buffer-regexp-list 
+  (setq helm-white-buffer-regexp-list
         (quote
          ("\\*Messages\\*"
           "\\*ansi-term"
@@ -181,6 +217,7 @@
           "\\*cider-error.+\\*"
           "magit:.+")))
 #+END_SRC
+
 * Clojure
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -190,6 +227,14 @@
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+** Hooks
+#+BEGIN_SRC emacs-lisp
+  (use-package clojure-mode
+    :bind (:map clojure-mode-map
+                ([C-f7] . cider-jack-in)
+                ([C-M-f7] . cider-eval-buffer)))
+#+END_SRC
+
 ** Fancify Symbols
 Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 (+ a 5))=, =ƒ(+ % 5)=, =∈{2 4 6}= and =Ƥ=.
@@ -197,6 +242,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;; Represent annonymous functions, partial functions, and sets with greek symbols
   (setq clojure-enable-fancify-symbols t)
 #+END_SRC
+
 * Python
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -206,12 +252,33 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+** Pyenv
 #+BEGIN_SRC emacs-lisp
-(setq exec-path (append '("/home/curtis/.config/pyenv/bin" "/home/curtis/.config/pyenv/shims" ) exec-path))
+  ;; Setup pyenv
+  (cond ((equal system-type 'darwin)
+         (defvar pyenv-home "/Users/curtis/.pyenv"))
+        ((equal system-type 'gnu/linux)
+         (defvar pyenv-home "/home/curtis/.config/pyenv")))
 
+  (setq exec-path (append
+                   `(,(concat pyenv-home "/bin")
+                     ,(concat pyenv-home "/shims"))
+                   exec-path))
+#+END_SRC
 
-(setq python-shell-interpreter-args "--simple-prompt -i" )
-(setq python-shell-interpreter "/home/curtis/.config/pyenv/shims/ipython")
+** IPython
+#+BEGIN_SRC emacs-lisp
+  ;; Python interpreter to use for repl
+  (setq python-shell-interpreter-args "--simple-prompt -i" )
+  (setq python-shell-interpreter (concat pyenv-home "/shims/ipython"))
+#+END_SRC
+
+** Hooks
+#+BEGIN_SRC emacs-lisp
+  ;; Hooks
+  (use-package python-mode
+    :bind (:map python-mode-map
+                ([C-f7] . spacemacs/python-start-or-switch-repl)))
 #+END_SRC
 
 * Smartparens
@@ -223,8 +290,9 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
 
+** Keybindings
 #+BEGIN_SRC emacs-lisp
-  ;; Smartparens keybindings
+  ;; Keybindings
   (global-set-key (kbd "C-M-f") 'sp-forward-sexp)
   (global-set-key (kbd "C-M-b") 'sp-backward-sexp)
 
@@ -246,10 +314,10 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (global-set-key (kbd "M-<delete>") 'sp-unwrap-sexp)
   (global-set-key (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
 
-  (global-set-key (kbd "C-<right>") 'sp-forward-slurp-sexp)
-  (global-set-key (kbd "C-<left>") 'sp-forward-barf-sexp)
-  (global-set-key (kbd "C-M-<left>") 'sp-backward-slurp-sexp)
-  (global-set-key (kbd "C-M-<right>") 'sp-backward-barf-sexp)
+  (global-set-key (kbd "C-0") 'sp-forward-slurp-sexp)
+  (global-set-key (kbd "C-M-0") 'sp-forward-barf-sexp)
+  (global-set-key (kbd "C-9") 'sp-backward-slurp-sexp)
+  (global-set-key (kbd "C-M-9") 'sp-backward-barf-sexp)
 
   (global-set-key (kbd "M-D") 'sp-splice-sexp)
   (global-set-key (kbd "C-M-<delete>") 'sp-splice-sexp-killing-forward)
@@ -270,9 +338,9 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (bind-key "C-c b" (lambda () (interactive) (sp-beginning-of-sexp -2)) smartparens-mode-map)
 
   (global-set-key (kbd "H-<delete>") (lambda ()
-                                (smartparens-strict-mode nil)
-                                (delete-backward-char)
-                                (smartparens-strict-mode t)))
+                                       (smartparens-strict-mode nil)
+                                       (delete-backward-char)
+                                       (smartparens-strict-mode t)))
 #+END_SRC
 
 * Which-Key
@@ -283,13 +351,14 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
-
+** UI
 #+BEGIN_SRC emacs-lisp
   (setq which-key-side-window-location 'right)
   (setq which-key-side-window-max-width 0.33)
   (setq which-key-side-window-max-height 0.25)
   (setq which-key-add-column-padding 2)
 #+END_SRC
+
 * GPG
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -300,10 +369,15 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(require 'epa-file)
-(custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))
-(epa-file-enable)
+(use-package epa-file
+  :config
+  (cond ((equal system-type 'darwin)
+         (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2")))
+        ((equal system-type 'gnu/linux)
+         (custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))))
+  (epa-file-enable))
 #+END_SRC
+
 * MMM-Mode
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -314,13 +388,13 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (mmm-add-classes '((markdown-clojure 
+  (mmm-add-classes '((markdown-clojure
                       :submode clojure-mode
                       :face mmm-declaration-submode-face
                       :front "^{% highlight clojure %}[\n\r]+"
                       :back "^{% endhighlight %}$")))
 
-  (mmm-add-classes '((markdown-latex 
+  (mmm-add-classes '((markdown-latex
                       :submode TeX-mode
                       :face mmm-declaration-submode-face
                       :front "^\\$\\$[\n\r]+"
@@ -340,7 +414,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #+END_SRC
- 
+
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'load-path "~/code/spotify.el/")
 
