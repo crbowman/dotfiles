@@ -406,21 +406,3 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (setq mmm-parse-when-idle 't)
 #+END_SRC
 
-* Spotify
-#+BEGIN_SRC emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;
-  ;; Spotify.el
-  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'load-path "~/code/spotify.el/")
-
-  (use-package spotify
-    :config
-    (setq spotify-oauth2-client-secret "8021211038534fbc8c3041e32e7f966c")
-    (setq spotify-oauth2-client-id "7d7e10746824419ea6a4129dd42839d8"))
-#+END_SRC
-
