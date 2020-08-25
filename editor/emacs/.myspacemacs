@@ -86,7 +86,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(solaire-mode
                                       all-the-icons
                                       doom-modeline
-                                      helm-spotify-plus
                                       auctex)
 
    ;; A list of packages that cannot be updated.
