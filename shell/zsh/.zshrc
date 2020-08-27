@@ -5,6 +5,7 @@ ZSH_THEME="avit"
 DOTFILES=$HOME/code/dotfiles
 
 export ZSH_CUSTOM=$DOTFILES/shell/zsh/custom
+export ZSH_COMPDUMP=$XDG_DATA_HOME/zsh 
 
 fpath=($ZSH_CUSTOM/functions $ZSH_CUSTOM/completions $fpath)
 

@@ -75,7 +75,6 @@
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
-  export ZDOTDIR=$HOME/.config/zsh
   export HISTFILE=$XDG_DATA_HOME/zsh/history
 #+END_SRC
 
@@ -94,6 +93,14 @@
 #+END_SRC
 
 #+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  # zsh path
+  path=($HOME/bin
+        $HOME/bin/diff-so-fancy
+        /usr/local/{bin,sbin}
+        $path)
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
   # Ensure that a non-login, non-interactive shell has a defined environment.
   if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
       source "${ZDOTDIR:-$HOME}/.zprofile"
@@ -106,15 +113,6 @@
 # This file is sourced only for login shells (i.e. shells
 # invoked with "-" as the first character of argv[0], and
 # shells invoked with the -l flag.)
-
-
-
-#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zprofile"
-  # zsh path
-  path=($HOME/bin
-        /usr/local/{bin,sbin}
-        $path)
-#+END_SRC
 
 * ZSHRC
 # ~/.config/zsh/.zshrc: user-level .zshrc file for zsh(1).
@@ -131,7 +129,7 @@
   DOTFILES=$HOME/code/dotfiles
 
   export ZSH_CUSTOM=$DOTFILES/shell/zsh/custom
-  export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh 
+  export ZSH_COMPDUMP=$XDG_DATA_HOME/zsh 
 
   fpath=($ZSH_CUSTOM/functions $ZSH_CUSTOM/completions $fpath)
 #+END_SRC
