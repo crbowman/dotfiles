@@ -17,6 +17,10 @@
 ;; Doom Modeline
 (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 
+;; Display Time
+(setq display-time-default-load-average nil)
+(display-time-mode t)
+
 ;; Doom Themes Configuration
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
@@ -61,6 +65,7 @@
 (global-set-key (kbd "C-x o") (lambda ()
                                 (interactive)
                                 (other-window -1)))
+
 (global-set-key (kbd "C-x p") (lambda ()
                                 (interactive)
                                 (other-window 1)))
@@ -149,8 +154,8 @@
 
 (use-package clojure-mode
   :bind (:map clojure-mode-map
-              ([C-f7] . cider-jack-in)
-              ([C-M-f7] . cider-eval-buffer)))
+         ([C-f7] . cider-jack-in)
+         ([C-M-f7] . cider-eval-buffer)))
 
 ;; Represent annonymous functions, partial functions, and sets with greek symbols
 (setq clojure-enable-fancify-symbols t)
@@ -175,6 +180,7 @@
 ;; Python interpreter to use for repl
 (setq python-shell-interpreter-args "--simple-prompt -i" )
 (setq python-shell-interpreter (concat pyenv-home "/shims/ipython"))
+
 
 ;; Hooks
 (use-package python-mode

@@ -17,7 +17,7 @@
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Curtis Bowman"
         user-mail-address "curtis@partiallyappllied.io")
-#+END_SRC 
+#+END_SRC
 
 m* Appearance
 #+BEGIN_SRC emacs-lisp
@@ -36,9 +36,11 @@ m* Appearance
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+#+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"
+  ;; Fonts
   (defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
-                               ((<= 2560 (display-pixel-width)) 16)
-                               ((<= 1980 (display-pixel-width)) 14)
+                               ((<= 2560 (display-pixel-width)) 12)
+                               ((<= 1980 (display-pixel-width)) 12)
                                ((<= 1440 (display-pixel-width)) 12)))
 
   (setq-default dotspacemacs-default-font `("Source Code Pro"
@@ -48,9 +50,17 @@ m* Appearance
 #+END_SRC
 
 ** Modeline
+
 #+BEGIN_SRC emacs-lisp
   ;; Doom Modeline
   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  ;; Display Time
+  (setq display-time-default-load-average nil)
+  (display-time-mode t)
 #+END_SRC
 
 ** Doom Themes
@@ -119,6 +129,7 @@ m* Appearance
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
                                   (other-window -1)))
+
   (global-set-key (kbd "C-x p") (lambda ()
                                   (interactive)
                                   (other-window 1)))
@@ -174,6 +185,7 @@ m* Appearance
 #+END_SRC
 
 * Helm
+
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
@@ -278,7 +290,6 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (use-package python-mode
     :bind (:map python-mode-map
                 ([C-f7] . spacemacs/python-start-or-switch-repl)))
-#+END_SRC
 
 * Smartparens
 #+BEGIN_SRC emacs-lisp
@@ -368,13 +379,13 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-(use-package epa-file
-  :config
-  (cond ((equal system-type 'darwin)
-         (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2")))
-        ((equal system-type 'gnu/linux)
-         (custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))))
-  (epa-file-enable))
+  (use-package epa-file
+    :config
+    (cond ((equal system-type 'darwin)
+           (custom-set-variables '(epg-gpg-program "/usr/local/MacGPG2/bin/gpg2")))
+          ((equal system-type 'gnu/linux)
+           (custom-set-variables '(epg-gpg-program "/usr/bin/gpg"))))
+    (epa-file-enable))
 #+END_SRC
 
 * MMM-Mode
@@ -404,4 +415,3 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
 
   (setq mmm-parse-when-idle 't)
 #+END_SRC
-
