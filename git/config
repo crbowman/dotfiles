@@ -1,0 +1,47 @@
+[user]
+  name = Curtis Bowman
+	email = c.bowman1711@gmail.com
+	username = crbowman
+
+[core]
+  editor = emacs -nw
+  pager = diff-so-fancy | less --tabs=1,5 -R
+  excludesfile = ~/.config/git/gitignore
+
+[web]
+  browser = /usr/bin/vivaldi
+
+[alias]
+lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+lg = !"git lg1"
+st = status
+
+wow = log --all --graph --decorate --oneline --simplify-by-decoration
+
+[color]
+  ui = always
+
+[color "diff"]
+	meta = yellow bold
+  commit = green bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = "red bold 52"
+  newNormal = "green bold"
+  newHighlight = "green bold 22"
+
+[color "branch"]
+	current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
