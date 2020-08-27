@@ -1,0 +1,231 @@
+#+TITLE: Zsh Configuration
+#+AUTHOR: Curtis Bowman
+#+EMAIL: curtis@partiallyappllied.tech
+#+OPTIONS: toc:nil num:nil
+#+PROPERTY: header-args :tangle  "~/code/dotfiles/shell/zsh/.zshrc"
+
+
+* README
+** Configuration Files
+   Zsh has several system-wide and user-local configuration files.
+   
+   System-wide configuration files are installation-dependent but are installed
+   in */etc* by default.
+
+   User-local configuration files have the same name as their global counterparts
+   but are prefixed with a dot (hidden). Zsh looks for these files in the path
+   stored in the `$ZDOTDIR` environment variable. However, if said variable is
+   not defined, Zsh will use the user's home directory.
+
+** File Descriptions
+   The configuration files are read in the following order:
+    1. /etc/zshenv
+    2. ~/.zshenv
+    3. /etc/zprofile
+    4. ~/.zprofile
+    5. /etc/zshrc
+    6. ~/.zshrc
+    7. ~/.oh-my-zsh/oh-my-zsh.sh
+    8. /etc/zlogin
+    9. ~/.zlogin
+    10. ~/.zlogout
+    11. /etc/zlogout
+
+*** zshenv 
+    This file is sourced by all instances of Zsh, and thus, it should be kept as
+    small as possible and should only define environment variables.
+*** zprofile 
+    This file is similar to zlogin, but it is sourced before zshrc. It was added
+    for KornShell fans. See the description of zlogin below for what it may
+    contain. zprofile and zlogin are not meant to be used concurrently but can be done so.
+*** zshrc
+    This file is sourced by interactive shells. It should define aliases, functions, 
+    shell options, and key bindings.
+*** oh-my-zsh
+    This directory contains the oh-my-zsh file that configures Oh-My-Zsh. It contains 
+    directories for plugins, themes, and custom user scripts among other functionalities.
+*** zlogin
+    This file is sourced by login shells after zshrc, and thus, it should contain
+    commands that need to execute at login. It is usually used for messages such as
+    fortune, msgs, or for the creation of files. This is not the file to define aliases,
+    functions, shell options, and keybindings. It should not change the shell environment.
+*** zlogout
+    This file is sourced by login shells during logout. It should be used for
+    displaying messages and the deletion of files.
+
+
+* ZSHENV
+# ~/.config/zsh/.zshenv: user level .zshenv file for zsh(1).
+#
+# This file is sourced on all invocations of the shell.
+# If the -f flag is present or if the NO_RCS option is
+# set within this file, all other initialization files
+# are skipped.
+#
+# This file should contain commands to set the command
+# search path, plus other important environment variables.
+# This file should not contain commands that produce
+# output or assume the shell is attached to a tty.
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  # XDB base directories
+  export XDG_CONFIG_HOME=$HOME/.config
+  export XDG_CACHE_HOME=$HOME/.cache
+  export XDG_DATA_HOME=$HOME/.local/share
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  export ZDOTDIR=$HOME/.config/zsh
+  export HISTFILE=$XDG_DATA_HOME/zsh/history
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  # export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
+  export LESSHISTFILE=$XDG_CACHE_HOME/less/history
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  # Pyenv Setup
+  export PYENV_ROOT=$XDG_CONFIG_HOME/pyenv
+  export PATH=$PYENV_ROOT/bin:$PATH
+  if command -v pyenv 1>/dev/null 2>&1; then
+      eval "$(pyenv init -)"
+  fi
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zshenv"
+  # Ensure that a non-login, non-interactive shell has a defined environment.
+  if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+      source "${ZDOTDIR:-$HOME}/.zprofile"
+  fi
+#+END_SRC
+
+* ZPROFILE
+# ~/.config/zsh/.zprofile: user level .zprofile file for zsh(1).
+#
+# This file is sourced only for login shells (i.e. shells
+# invoked with "-" as the first character of argv[0], and
+# shells invoked with the -l flag.)
+
+
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zprofile"
+  # zsh path
+  path=($HOME/bin
+        /usr/local/{bin,sbin}
+        $path)
+#+END_SRC
+
+* ZSHRC
+# ~/.config/zsh/.zshrc: user-level .zshrc file for zsh(1).
+#
+# This file is sourced only for interactive shells. It
+# should contain commands to set up aliases, functions,
+# options, key bindings, etc.
+
+#+BEGIN_SRC sh
+  export ZSH=$ZDOTDIR/.oh-my-zsh
+ 
+  ZSH_THEME="avit"
+  
+  DOTFILES=$HOME/code/dotfiles
+
+  export ZSH_CUSTOM=$DOTFILES/shell/zsh/custom
+  export ZSH_COMPDUMP=$XDG_CACHE_HOME/zsh 
+
+  fpath=($ZSH_CUSTOM/functions $ZSH_CUSTOM/completions $fpath)
+#+END_SRC
+
+#+BEGIN_SRC sh
+  plugins=(git
+           lein
+           extract
+           colored-man-pages
+           # Custom Plugins
+           zsh-syntax-highlighting)
+#+END_SRC
+
+#+BEGIN_SRC sh
+  source $ZSH/oh-my-zsh.sh
+#+END_SRC
+
+#+BEGIN_SRC sh
+  if [[ -n $SSH_CONNECTION ]]; then
+    export EDITOR='emacs -nw'
+  else
+    export EDITOR='emacs -nw'
+  fi
+#+END_SRC
+
+#+BEGIN_SRC sh
+  # Defines LS_COLORS
+  eval `dircolors $XDG_CONFIG_HOME/dir_colors/dircolors`
+#+END_SRC
+
+* ZLOGIN
+# ~/.config/zsh/.zlogin: user-level .zlogin file for zsh(1).
+#
+# This file is sourced only for login shells. It
+# should contain commands that should be executed only
+# in login shells. It should be used to set the terminal
+# type and run a series of external commands (fortune,
+# msgs, from, etc.)
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zlogin"
+  # Executes commands at login post-zshrc
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zlogin"
+  # Execute code that does not affect the current session in the background.
+  {
+    # Compile the completion dump to increase startup speed.
+    zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+    if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+      zcompile "$zcompdump"
+    fi
+  } &!
+
+  # Execute code only if STDERR is bound to a TTY.
+  [[ -o INTERACTIVE && -t 2 ]] && {
+
+    # Print a random, hopefully interesting, adage.
+    if (( $+commands[fortune] )); then
+      fortune -s
+      print
+    fi
+
+  } >&2
+#+END_SRC
+
+* ZLOGOUT
+# ~/.config/zsh/.zlogout: user-level .zlogout file for zsh(1).
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zlogout"
+  # Execute commands at logout
+#+END_SRC
+
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/.zlogout"
+  # Execute code only if STDERR is bound to a TTY.
+  [[ -o INTERACTIVE && -t 2 ]] && {
+
+  SAYINGS=(
+      "So long and thanks for all the fish.\n  -- Douglas Adams"
+      "Good morning! And in case I don't see ya, good afternoon, good evening and goodnight.\n  --Truman Burbank"
+  )
+
+  # Print a randomly-chosen message:
+  echo $SAYINGS[$(($RANDOM % ${#SAYINGS} + 1))]
+
+  } >&2
+#+END_SRC
+
+
+* ALIASES
+#+BEGIN_SRC sh :tangle "~/code/dotfiles/shell/zsh/custom/aliases.zsh"
+  alias weather="curl wttr.in/charlotte"
+  alias myip="curl ifconfig.co"
+  alias tinyurl="curl -s http://tinyurl.com/api-create.php\?url\=http://www.partiallyappllied.tech"
+#+END_SRC
+* FUNCTIONS
+* COMPLETIONS
+

@@ -26,8 +26,9 @@
 ;; pop-up buffers like neotree/helm/etc..
 (use-package solaire-mode
   :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  :hook (minibuffer-setup . solaire-mode-in-minibuffer)
   :config
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
+  (solaire-global-mode +1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -40,8 +41,8 @@
 (setq auto-save-default nil) ; stop creating #autosave# files
 (setq create-lockfiles nil) ; stop creating .#lock files
 
-;; No more "Package cl is deprecated" warnings from third-party packages
-(setq byte-compile-warnings '(cl-functions))
+;; set org-babel default sh command to zsh
+(setq org-babel-sh-command "zsh")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;

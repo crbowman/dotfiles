@@ -19,7 +19,7 @@
         user-mail-address "curtis@partiallyappllied.io")
 #+END_SRC 
 
-* Appearance
+m* Appearance
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
@@ -67,8 +67,9 @@
   ;; pop-up buffers like neotree/helm/etc..
   (use-package solaire-mode
     :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+    :hook (minibuffer-setup . solaire-mode-in-minibuffer)
     :config
-    (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
+    (solaire-global-mode +1))
 #+END_SRC
 
 * Misc
@@ -89,10 +90,8 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  ;; No more "Package cl is deprecated" warnings from third-party packages
-  (setq byte-compile-warnings '(cl-functions))
-
-
+  ;; set org-babel default sh command to zsh
+  (setq org-babel-sh-command "zsh")
 #+END_SRC
 
 * Keybindings

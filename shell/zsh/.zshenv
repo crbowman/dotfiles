@@ -1,16 +1,11 @@
-#
-# Defines environment variables.
-#
-
 # XDB base directories
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
-# export ZDOTDIR=$HOME/.config/zsh
-export HISTFILE=$XDG_DATE_HOME/zsh/history
+export ZDOTDIR=$HOME/.config/zsh
+export HISTFILE=$XDG_DATA_HOME/zsh/history
 
-# XDG setup for less
 # export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
 export LESSHISTFILE=$XDG_CACHE_HOME/less/history
 
