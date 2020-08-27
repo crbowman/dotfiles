@@ -4,6 +4,7 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Fonts
 (defconst my-font-size (cond ((<= 3840 (display-pixel-width)) 20)
                              ((<= 2560 (display-pixel-width)) 12)
                              ((<= 1980 (display-pixel-width)) 12)

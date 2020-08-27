@@ -19,7 +19,7 @@
         user-mail-address "curtis@partiallyappllied.io")
 #+END_SRC
 
-m* Appearance
+* Appearance
 #+BEGIN_SRC emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;
@@ -35,6 +35,7 @@ m* Appearance
   ;; Fonts
   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp :tangle "~/code/dotfiles/editor/emacs/curtis-init.el"
   ;; Fonts
@@ -55,6 +56,9 @@ m* Appearance
   ;; Doom Modeline
   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 
+  ;; Display time on modeline
+  (setq display-time-default-load-average nil)
+  (display-time-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -123,9 +127,9 @@ m* Appearance
             (setq mac-function-modifier 'hyper)))
 #+END_SRC
 
-** Windows
+** Emacs Windows
 #+BEGIN_SRC emacs-lisp
-  ;; Window switching
+  ;; Emacs window switching
   (global-set-key (kbd "C-x o") (lambda ()
                                   (interactive)
                                   (other-window -1)))
@@ -290,6 +294,7 @@ Pretty symbols for anonymous functions, set literals and partial, like =(λ [a]
   (use-package python-mode
     :bind (:map python-mode-map
                 ([C-f7] . spacemacs/python-start-or-switch-repl)))
+#+END_SRC
 
 * Smartparens
 #+BEGIN_SRC emacs-lisp

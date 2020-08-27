@@ -25,3 +25,4 @@ history
 *.pyc
 ido.last
 recentf
+.zcompdump*
