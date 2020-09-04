@@ -4,7 +4,8 @@
 #+OPTIONS: toc:nil num:nil
 #+PROPERTY: header-args :tangle  "~/code/dotfiles/shell/zsh/.zshrc"
 
-
+***  Update this config before tangling, there are changes in zsh configs not reflected in zsh.org
+ 
 * README
 ** Configuration Files
    Zsh has several system-wide and user-local configuration files.

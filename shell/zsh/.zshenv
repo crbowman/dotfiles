@@ -1,23 +1,38 @@
-# XDB base directories
+# XDG
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
+export XDG_BIN_HOME=$HOME/.local/bin
 
+# ZSH
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export ZSH=$ZDOTDIR/ohmyzsh
+export ZSH_CACHE_DIR=$XDG_CACHE_HOME/zsh
+export ZSH_COMPDUMP=$ZSH_CACHE_DIR/zcompdump-$SHORT_HOST-$ZSH_VERSION
 export HISTFILE=$XDG_DATA_HOME/zsh/history
+export DISABLE_AUTO_UPDATE=false
+export ZSH_DISABLE_COMPFIX=true # don't warn about loading non-safe files
+export ZSH_CUSTOM=$ZDOTDIR/custom
+fpath=($ZSH_CUSTOM/functions $ZSH_CUSTOM/completions $fpath)
 
-# export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
+
+# LESS
 export LESSHISTFILE=$XDG_CACHE_HOME/less/history
+export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
 
-# Pyenv Setup
+# PYENV
 export PYENV_ROOT=$XDG_CONFIG_HOME/pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
-# zsh path
-path=($HOME/bin
-      $HOME/bin/diff-so-fancy
+# MY ENV
+export DOTFILES=$HOME/code/dotfiles
+
+# PATH
+path=($XDG_BIN_HOME
+      $ZSH_CUSTOM/plugins/zsh-diff-so-fancy/bin
       /usr/local/{bin,sbin}
       $path)
 
