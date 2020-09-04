@@ -6,7 +6,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq user-full-name "Curtis Bowman"
-      user-mail-address "curtis@partiallyappllied.io")
+      user-mail-address "curtis@partiallyappllied.tech")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -17,17 +17,15 @@
 ;; Doom Modeline
 (setq doom-modeline-buffer-file-name-style 'relative-from-project)
 
-;; Display time on modeline
-(setq display-time-default-load-average nil)
-(display-time-mode)
-
 ;; Display Time
 (setq display-time-default-load-average nil)
-(display-time-mode t)
+(display-time-mode)
 
 ;; Doom Themes Configuration
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
+
+(doom-themes-neotree-config)
 (doom-themes-org-config)
 
 ;; Changes the background color to create contrast between file buffers and
@@ -36,6 +34,7 @@
   :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
   :hook (minibuffer-setup . solaire-mode-in-minibuffer)
   :config
+  (setq solaire-mode-auto-swap-bg nil)
   (solaire-global-mode +1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -145,9 +144,11 @@
 (setq helm-white-buffer-regexp-list
       (quote
        ("\\*Messages\\*"
+        "\\*Warnings\\*"
         "\\*ansi-term"
         "\\*cider-repl.+\\*"
         "\\*cider-error.+\\*"
+        "\\*spacemacs\\*"
         "magit:.+")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -1,6 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Curtis Bowman
-#+EMAIL: curtis@partiallyappllied.io
+#+EMAIL: curtis@partiallyappllied.tech
 #+OPTIONS: toc:nil num:nil
 #+PROPERTY: header-args :tangle  "~/code/dotfiles/editor/emacs/curtis.el"
 
@@ -16,7 +16,7 @@
 
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Curtis Bowman"
-        user-mail-address "curtis@partiallyappllied.io")
+        user-mail-address "curtis@partiallyappllied.tech")
 #+END_SRC
 
 * Appearance
@@ -55,16 +55,12 @@
 #+BEGIN_SRC emacs-lisp
   ;; Doom Modeline
   (setq doom-modeline-buffer-file-name-style 'relative-from-project)
-
-  ;; Display time on modeline
-  (setq display-time-default-load-average nil)
-  (display-time-mode)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
   ;; Display Time
   (setq display-time-default-load-average nil)
-  (display-time-mode t)
+  (display-time-mode)
 #+END_SRC
 
 ** Doom Themes
@@ -72,6 +68,8 @@
   ;; Doom Themes Configuration
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t)
+
+  (doom-themes-neotree-config)
   (doom-themes-org-config)
 #+END_SRC
 
@@ -83,6 +81,7 @@
     :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
     :hook (minibuffer-setup . solaire-mode-in-minibuffer)
     :config
+    (setq solaire-mode-auto-swap-bg nil)
     (solaire-global-mode +1))
 #+END_SRC
 
@@ -227,9 +226,11 @@
   (setq helm-white-buffer-regexp-list
         (quote
          ("\\*Messages\\*"
+          "\\*Warnings\\*"
           "\\*ansi-term"
           "\\*cider-repl.+\\*"
           "\\*cider-error.+\\*"
+          "\\*spacemacs\\*"
           "magit:.+")))
 #+END_SRC
 
